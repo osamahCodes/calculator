@@ -1,17 +1,37 @@
 function add(first, second){
-    return first+second;
+    displayValue = (first+second)+'';
+    output.textContent = displayValue;
+    displayValue = '0';
+    evaluation.secondValue = first+second;
+    evaluation.firstValue = 0;
+    return;
 }
 
 function subtract(first,second){
-    return first-second;
+    displayValue = (first-second)+'';
+    output.textContent = displayValue;
+    displayValue = '0';
+    evaluation.secondValue = first-second;
+    evaluation.firstValue = 0;
+    return ;
 }
 
 function multiply(first,second){
-    return first*second;
+    displayValue = (first*second)+'';
+    output.textContent = displayValue;
+    displayValue = '0';
+    evaluation.secondValue = first*second;
+    evaluation.firstValue = 0;
+    return;
 }
 
 function divide(first,second){
-    return first/second;
+    displayValue = (first/second)+'';
+    output.textContent = displayValue;
+    displayValue = '0';
+    evaluation.secondValue = first/second;
+    evaluation.firstValue = 0;
+    return ;
 }
 
 function operate(operator, first, second){
@@ -28,7 +48,7 @@ function operate(operator, first, second){
 }
 
 function updateDisplayValue(e){
-    if(displayValue==='0'){
+    if(displayValue==='0' ){
         displayValue='';
     }
     if(e.target.id==='zero'){
@@ -54,9 +74,54 @@ function updateDisplayValue(e){
         displayValue+='9';
     }
     output.textContent = displayValue;
+    if(evaluation.firstValue!=0){
+        evaluation.secondValue = parseInt(displayValue);
+    }
 }
 
 const numbers = document.querySelector('.numbers');
 const output = document.querySelector('.output');
+const equals = document.querySelector('#equals');
+const clear = document.querySelector('#clear');
+const operations = document.querySelector('.operations');
 var displayValue = '0';
+let evaluation = {
+    firstValue: 0,
+    secondValue: 0,
+    operator: '',
+    isMultiple: false
+};
 numbers.addEventListener('click',(e)=> updateDisplayValue(e));
+equals.addEventListener('click', (e)=>{
+    if(evaluation.isMultiple){
+        evaluation.firstValue = parseInt(displayValue);
+        evaluation.isMultiple=false;
+    }
+    console.log('1. equals'+evaluation.firstValue)
+    console.log('2. equals'+evaluation.secondValue)
+    operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+})
+clear.addEventListener('click', (e)=>{
+    evaluation.firstValue = 0;
+    evaluation.operator = '0';
+    evaluation.secondValue = 0;
+    displayValue = '0';
+    evaluation.isMultiple=false;
+    output.textContent = '0';
+})
+operations.addEventListener('click',(e)=>{
+
+    if(evaluation.firstValue!=0 && evaluation.secondValue!=0){
+        evaluation.isMultiple=true;
+        operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+    }
+    evaluation.firstValue = parseInt(displayValue);
+    if(evaluation.isMultiple){
+        operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+    }
+    evaluation.operator = e.target.textContent;
+    displayValue= '0';
+    console.log('1. operations '+evaluation.firstValue)
+    console.log('2. operations '+evaluation.secondValue)
+
+})

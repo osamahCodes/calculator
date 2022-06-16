@@ -9,6 +9,11 @@ body{
     min-height: 100vh;
 }
 
+button{
+    width: 60px;
+    height: 60px;
+}
+
 .frame{
     display: flex;
     flex-direction: column;
@@ -31,5 +36,5 @@ body{
 .operations{
     display: flex;
     flex-direction: column;
-    
+
 }
