@@ -7,50 +7,72 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-color: #FFCB74;
 }
 
 button{
     width: 65px;
     height: 65px;
     font-size: 28px;
+    color: #07031A;
+    background-color: #B1B493;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #4f8a8b;
 }
 
 #zero{
-    width: 134px;
+    width: 133px;
 }
 
 .frame{
     display: flex;
     flex-direction: column;
     height: 415px;
-    width: 315px;
-    border-radius: 5px;
+    width: 288px;
+    border-radius: 10px;
     border-style: solid;
-    border-color: black;
+    border-color: #FFCB74;
     padding: 5px;
+    background-color: #4f8a8b;
 }
 
 .output{
     font-size: 40px;
-    /* border-width: 1px;
+    border-radius: 5px;
+    border-width: 1px;
     border-style: solid;
-    border-color: black; */
+    border-color:#e6e6e6;
     padding: 3px;
     margin-bottom: 5px;
+    background-color: #e6e6e6;
+    color: #07031A;
 }
 
 .keyboard{
     display: flex;
-    justify-content: center;
+    gap: 4px;
 }
 
 .numbers{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 4px;
     max-width: 203px;
 }
 
+.special{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    column-gap: 4px;
+}
 
 .operations{
     display: flex;
     flex-direction: column;
+    row-gap: 4px;
+    column-gap: 4px;
 
 }

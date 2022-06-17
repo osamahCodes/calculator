@@ -114,15 +114,6 @@ numbers.addEventListener('click',(e)=>{
     console.log(e.target.id)
      
 });
-// equals.addEventListener('click', (e)=>{
-//     operate(evaluation.operator, evaluation.firstValue, parseFloat(displayValue));
-// })
-// clear.addEventListener('click', (e)=>{
-//     evaluation.firstValue = 0;
-//     evaluation.operator = '';
-//     displayValue = '0';
-//     output.textContent = '0';
-// })
 operations.addEventListener('click',(e)=>{
 
     if(evaluation.firstValue!=0 && parseFloat(displayValue)!=0){
