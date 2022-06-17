@@ -2,8 +2,7 @@ function add(first, second){
     displayValue = (first+second)+'';
     output.textContent = displayValue;
     displayValue = '0';
-    evaluation.secondValue = first+second;
-    evaluation.firstValue = 0;
+    evaluation.firstValue = first+second;
     return;
 }
 
@@ -11,8 +10,7 @@ function subtract(first,second){
     displayValue = (first-second)+'';
     output.textContent = displayValue;
     displayValue = '0';
-    evaluation.secondValue = first-second;
-    evaluation.firstValue = 0;
+    evaluation.firstValue = first-second;
     return ;
 }
 
@@ -20,17 +18,19 @@ function multiply(first,second){
     displayValue = (first*second)+'';
     output.textContent = displayValue;
     displayValue = '0';
-    evaluation.secondValue = first*second;
-    evaluation.firstValue = 0;
+    evaluation.firstValue = first*second;
     return;
 }
 
 function divide(first,second){
-    displayValue = (first/second)+'';
+    if (second===0) {
+        displayValue = 'NAN';
+    }else{
+        displayValue = Math.round(first/second)+'';
+    }
     output.textContent = displayValue;
     displayValue = '0';
-    evaluation.secondValue = first/second;
-    evaluation.firstValue = 0;
+    evaluation.firstValue = first/second;
     return ;
 }
 
@@ -74,9 +74,9 @@ function updateDisplayValue(e){
         displayValue+='9';
     }
     output.textContent = displayValue;
-    if(evaluation.firstValue!=0){
-        evaluation.secondValue = parseInt(displayValue);
-    }
+    // if(evaluation.firstValue!=0){
+    //     evaluation.secondValue = parseInt(displayValue);
+    // }
 }
 
 const numbers = document.querySelector('.numbers');
@@ -87,41 +87,27 @@ const operations = document.querySelector('.operations');
 var displayValue = '0';
 let evaluation = {
     firstValue: 0,
-    secondValue: 0,
     operator: '',
-    isMultiple: false
 };
 numbers.addEventListener('click',(e)=> updateDisplayValue(e));
 equals.addEventListener('click', (e)=>{
-    if(evaluation.isMultiple){
-        evaluation.firstValue = parseInt(displayValue);
-        evaluation.isMultiple=false;
-    }
-    console.log('1. equals'+evaluation.firstValue)
-    console.log('2. equals'+evaluation.secondValue)
-    operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+    operate(evaluation.operator, evaluation.firstValue, parseInt(displayValue));
 })
 clear.addEventListener('click', (e)=>{
     evaluation.firstValue = 0;
-    evaluation.operator = '0';
-    evaluation.secondValue = 0;
+    evaluation.operator = '';
     displayValue = '0';
-    evaluation.isMultiple=false;
     output.textContent = '0';
 })
 operations.addEventListener('click',(e)=>{
 
-    if(evaluation.firstValue!=0 && evaluation.secondValue!=0){
-        evaluation.isMultiple=true;
-        operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+    if(evaluation.firstValue!=0 && parseInt(displayValue)!=0){
+        operate(evaluation.operator, evaluation.firstValue, parseInt(displayValue));
     }
-    evaluation.firstValue = parseInt(displayValue);
-    if(evaluation.isMultiple){
-        operate(evaluation.operator, evaluation.firstValue, evaluation.secondValue);
+    if (evaluation.firstValue===0) {
+        evaluation.firstValue = parseInt(displayValue);
     }
     evaluation.operator = e.target.textContent;
     displayValue= '0';
-    console.log('1. operations '+evaluation.firstValue)
-    console.log('2. operations '+evaluation.secondValue)
 
 })
