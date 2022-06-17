@@ -26,7 +26,7 @@ function divide(first,second){
     if (second===0) {
         displayValue = 'NAN';
     }else{
-        displayValue = Math.round(first/second)+'';
+        displayValue = +(Math.round((first/second)+'e+7')+'e-7')+'';
     }
     output.textContent = displayValue;
     displayValue = '0';
@@ -48,8 +48,15 @@ function operate(operator, first, second){
 }
 
 function updateDisplayValue(e){
+    if(displayValue.length>=9){
+        return;
+    }
+
     if(displayValue==='0' ){
         displayValue='';
+    }
+    if(displayValue.includes('.')&&e.target.id==='.'){
+        return;
     }
     if(e.target.id==='zero'){
         displayValue+='0';
@@ -72,6 +79,8 @@ function updateDisplayValue(e){
         displayValue+='8';
     }else if(e.target.id==='nine'){
         displayValue+='9';
+    }else if(e.target.id==='dot'){
+        displayValue+='.';
     }
     output.textContent = displayValue;
     // if(evaluation.firstValue!=0){
@@ -89,23 +98,38 @@ let evaluation = {
     firstValue: 0,
     operator: '',
 };
-numbers.addEventListener('click',(e)=> updateDisplayValue(e));
-equals.addEventListener('click', (e)=>{
-    operate(evaluation.operator, evaluation.firstValue, parseInt(displayValue));
-})
-clear.addEventListener('click', (e)=>{
-    evaluation.firstValue = 0;
-    evaluation.operator = '';
-    displayValue = '0';
-    output.textContent = '0';
-})
+numbers.addEventListener('click',(e)=>{
+    if(e.target.id==='equals'){
+        operate(evaluation.operator, evaluation.firstValue, parseFloat(displayValue));
+    }else if(e.target.id==='clear'){
+        evaluation.firstValue = 0;
+        evaluation.operator = '';
+        displayValue = '0';
+        output.textContent = '0';
+    }else if(e.target.id==='percent'){
+        operate(evaluation.operator='/', parseFloat(displayValue), 100);
+    }else{
+        updateDisplayValue(e);
+    }
+    console.log(e.target.id)
+     
+});
+// equals.addEventListener('click', (e)=>{
+//     operate(evaluation.operator, evaluation.firstValue, parseFloat(displayValue));
+// })
+// clear.addEventListener('click', (e)=>{
+//     evaluation.firstValue = 0;
+//     evaluation.operator = '';
+//     displayValue = '0';
+//     output.textContent = '0';
+// })
 operations.addEventListener('click',(e)=>{
 
-    if(evaluation.firstValue!=0 && parseInt(displayValue)!=0){
-        operate(evaluation.operator, evaluation.firstValue, parseInt(displayValue));
+    if(evaluation.firstValue!=0 && parseFloat(displayValue)!=0){
+        operate(evaluation.operator, evaluation.firstValue, parseFloat(displayValue));
     }
     if (evaluation.firstValue===0) {
-        evaluation.firstValue = parseInt(displayValue);
+        evaluation.firstValue = parseFloat(displayValue);
     }
     evaluation.operator = e.target.textContent;
     displayValue= '0';

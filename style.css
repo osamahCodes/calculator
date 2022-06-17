@@ -10,16 +10,21 @@ body{
 }
 
 button{
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
+    font-size: 28px;
+}
+
+#zero{
+    width: 134px;
 }
 
 .frame{
     display: flex;
     flex-direction: column;
-    height: 400px;
-    width: 300px;
-    border-width: 5px;
+    height: 415px;
+    width: 315px;
+    border-radius: 5px;
     border-style: solid;
     border-color: black;
     padding: 5px;
@@ -27,11 +32,22 @@ button{
 
 .output{
     font-size: 40px;
+    /* border-width: 1px;
+    border-style: solid;
+    border-color: black; */
+    padding: 3px;
+    margin-bottom: 5px;
 }
 
 .keyboard{
     display: flex;
+    justify-content: center;
 }
+
+.numbers{
+    max-width: 203px;
+}
+
 
 .operations{
     display: flex;
