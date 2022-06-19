@@ -47,6 +47,7 @@ button{
     margin-bottom: 5px;
     background-color: #e6e6e6;
     color: #07031A;
+    max-height: 54px;
 }
 
 .keyboard{
